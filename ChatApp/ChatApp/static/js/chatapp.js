@@ -30,12 +30,6 @@ function handleResponse() {
     $(".chatapp-post").remove();
     list = document.getElementById("post-list");
 
-    /*
-    // Remove old posts
-    while (list.hasChildNodes()) {
-        list.removeChild(list.firstChild);
-    }
-*/
     var xmlData = req.responseXML;
     var posts = xmlData.getElementsByTagName("post")
     
@@ -62,10 +56,7 @@ function handleResponse() {
         newHeader.appendChild(newDate);
 
         newPost.appendChild(newHeader);
-        /*
-        var newBreak = document.createElement("br");
-        newPost.appendChild(newBreak);
-*/
+        
         var newText = document.createElement("div");
         newText.className = "chatapp-post-text";
         newText.innerHTML = text;
@@ -76,5 +67,4 @@ function handleResponse() {
         
     }
 }
-//sendRequest();
 window.setInterval(sendRequest, 500);
