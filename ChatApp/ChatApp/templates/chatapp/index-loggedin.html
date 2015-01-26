@@ -1,0 +1,45 @@
+{% extends "base-chatapp.html" %}
+
+{% block title %} FSE Chat Room {% endblock %}
+{% block style %} "/static/css/chatapp.css" {% endblock %}
+
+{% block content %}
+<div class="container">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header navbar-brand">FSE Chat Room -- {{username}}</div>
+      <div id="navbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="/chatapp/logout">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<div class="container">
+  <div class="chatapp-window" id="post-list">
+    {% for post in posts reversed %}
+      <div class="chatapp-post">
+        <div class="chatapp-post-header">
+          <div class="chatapp-post-user">{{post.user}}</div>
+          <div class="chatapp-post-date" align="right">{{post.date}}</div>
+        </div>
+        <div class="chatapp-post-text">{{post.text}}</div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="container">
+  <form method="POST" action="/chatapp/post">
+    <textarea class="chatapp-newpost" name="text" rows="5"></textarea>
+    <br>
+    <input type="submit" class="btn btn-lg btn-primary" value="POST">
+    {% csrf_token %}
+  </form>
+</div>
+</div>
+{% endblock %}

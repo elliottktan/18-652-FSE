@@ -1,0 +1,39 @@
+{% extends "base-chatapp.html" %}
+
+{% block title %} FSE Chat Room -- Login {% endblock %}
+{% block style %} "/static/css/login.css" {% endblock %}
+
+{% block errors %}
+	{% if form.errors %}
+		<p style="color:red">
+			Incorrect user name and password.
+		</p>
+	{% endif %}
+{% endblock %}
+
+{% block content %}
+
+{% for error in errors %}
+	<p style="color:red"> {{error}} </p>
+{% endfor %}
+
+<div class="container">
+	<form class="form-signin" method="post" action="{% url 'django.contrib.auth.views.login' %}">
+		<h2 class="form-signin-heading">Blog Login</h2>
+
+		<input type="text" class="form-control" name="username" 
+			placeholder="Username" autofocus value={{username}}>
+		<input type="password" class="form-control" name="password" 
+			placeholder="Password" value={{password}}>
+		<input class="btn btn-lg btn-primary btn-block" 
+	       type="submit" value="Login" />   
+	    <input type="hidden" name="next" value="/chatapp" />    
+	    {% csrf_token %}
+	</form>
+	<form class="form-signin" method="get" action="/chatapp/register">
+		<input class="btn btn-lg btn-primary btn-block" 
+	       type="submit" value="Register">
+	    {% csrf_token %}
+	</form>	
+</div>
+{% endblock %}

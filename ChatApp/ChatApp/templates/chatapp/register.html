@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+<!DOCTYPE HTML>
+
+{% block title %} FSE Chat Room -- Register {% endblock %}
+{% block style %} "/static/css/login.css" {% endblock %}
+
+{% block errors %}
+{% for error in errors %}
+<p style="color: red">
+{{ error }}
+</p>
+{% endfor %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form class="form-signin" method="post" action="/chatapp/register">
+        <h2 class="form-signin-heading">Register an account:</h2>
+        <input type="text" class="form-control" name="username" 
+            placeholder="Username" value="{{username}}" autofocus>
+        <input type="password" class="form-control" name="password1" 
+            placeholder="Password">
+        <input type="password" class="form-control" name="password2"
+            placeholder="Confirm Password">
+
+        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Register" />
+        {% csrf_token %}
+    </form>
+</div>
+{% endblock %}

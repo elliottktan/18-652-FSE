@@ -1,0 +1,29 @@
+{% extends "base-chatapp.html" %}
+
+{% block title %} FSE Chat Room {% endblock %}
+{% block style %} "/static/css/chatapp.css" {% endblock %}
+
+{% block header %}
+  <form action="/chatapp/login" method="get" style="display:inline">
+    <input class="btn btn-sm btn-primary" type="submit" value="Login">
+  </form>
+
+  <form action="/chatapp/register" method="get" style="display:inline">
+    <input class="btn btn-sm btn-primary" type="submit" value="Register">
+  </form>
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <p>
+    <ol>
+    {% for item in items reversed %}
+      <p>
+        {{username}} ({{item.date}}) <br>
+        {{item.text}}
+      </p>   
+    {% endfor %}
+    </ol>
+    </p>
+  </div>
+{% endblock %}
